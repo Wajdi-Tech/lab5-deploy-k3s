@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: web-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: web
+  template:
+    metadata:
+      labels:
+        app: web
+    spec:
+      containers:
+      - name: web
+        image: wajditech/lab5-webapp:latest
+        ports:
+        - containerPort: 3000
+        env:
+        - name: DB_HOST
+          value: "db-service"
+        - name: DB_PORT
+          value: "5432"
+        - name: DB_USER
+          value: "labuser"
+        - name: DB_PASSWORD
+          value: "labpassword"
+        - name: DB_NAME
+          value: "labdb"
+
